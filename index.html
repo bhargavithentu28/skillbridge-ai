@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge AI | Career Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #64748b;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        /* Resume Builder Section */
+        .builder-container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 4rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .add-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .preview-container {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resume-preview {
+            background: white;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .download-btn {
+            text-align: center;
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* Interview Simulator Section */
+        .interview-container {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .interview-panel {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .avatar-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--dark);
+            overflow: hidden;
+        }
+
+        .mic-status {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            border: 3px solid white;
+        }
+
+        .mic-status.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .stress-indicator {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border: 3px solid white;
+        }
+
+        .stress-indicator.high {
+            background: #ef4444;
+        }
+
+        .stress-indicator.medium {
+            background: #f59e0b;
+        }
+
+        .feedback-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .transcript-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .analysis-container {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+
+        /* Career Path Section */
+        .path-container {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-bottom: 4rem;
+        }
+
+        .domain-selector {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .domain-selector select {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            min-width: 300px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: #e2e8f0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+            text-align: right;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -10px;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Certification Section */
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .cert-image {
+            height: 160px;
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .cert-body {
+            padding: 1.5rem;
+        }
+
+        .cert-body h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-body p {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .cert-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            
+            .interview-container {
+                flex-direction: column;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left, .right {
+                left: 0;
+                text-align: left;
+            }
+            
+            .download-btn {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <span>SkillBridge AI</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#resume-builder">Resume Builder</a></li>
+                    <li><a href="#interview-simulator">Interview Prep</a></li>
+                    <li><a href="#career-path">Career Path</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>Your AI-Powered Career Companion</h1>
+            <p>SkillBridge AI helps you build ATS-optimized resumes, ace interviews, and chart your career path with personalized AI guidance.</p>
+            <a href="#resume-builder" class="btn">Build Your Resume</a>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>ATS-Optimized Resume Builder</h3>
+                <p>Create professional resumes that pass through Applicant Tracking Systems with our AI-powered builder.</p>
+                <a href="#resume-builder" class="btn btn-outline">Build Now</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Smart Interview Simulator</h3>
+                <p>Practice with our AI interviewer that listens to your answers and provides real-time feedback.</p>
+                <a href="#interview-simulator" class="btn btn-outline">Start Practice</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-road"></i>
+                </div>
+                <h3>Personalized Career Roadmap</h3>
+                <p>Get a customized 5-year career path based on your chosen domain and goals.</p>
+                <a href="#career-path" class="btn btn-outline">View Roadmap</a>
+            </div>
+        </section>
+
+        <section id="resume-builder" class="builder-container">
+            <h2 class="section-title">AI Resume Builder</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="fullName">Full Name*</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email*</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" placeholder="+1 (123) 456-7890">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn Profile</label>
+                    <input type="url" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                </div>
+                <div class="form-group">
+                    <label for="summary">Professional Summary*</label>
+                    <textarea id="summary" placeholder="Experienced professional with..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="jobTitle">Target Job Title*</label>
+                    <input type="text" id="jobTitle" placeholder="Software Engineer" required>
+                </div>
+            </div>
+
+            <h3>Work Experience</h3>
+            <div id="experienceContainer">
+                <div class="form-grid experience-item">
+                    <div class="form-group">
+                        <label for="company1">Company Name*</label>
+                        <input type="text" id="company1" placeholder="ABC Corp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="position1">Position*</label>
+                        <input type="text" id="position1" placeholder="Software Developer" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration1">Duration*</label>
+                        <input type="text" id="duration1" placeholder="Jan 2020 - Present" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="responsibilities1">Responsibilities & Achievements*</label>
+                        <textarea id="responsibilities1" placeholder="- Developed new features...&#10;- Improved performance by 30%..." required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="add-section" id="addExperience">
+                <i class="fas fa-plus-circle"></i>
+                <span>Add Another Position</span>
+            </div>
+
+            <h3>Education</h3>
+            <div id="educationContainer">
+                <div class="form-grid education-item">
+                    <div class="form-group">
+                        <label for="institution1">Institution*</label>
+                        <input type="text" id="institution1" placeholder="State University" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="degree1">Degree*</label>
+                        <input type="text" id="degree1" placeholder="Bachelor of Science in Computer Science" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gradYear1">Graduation Year*</label>
+                        <input type="text" id="gradYear1" placeholder="2020" required>
+                    </div>
+                </div>
+            </div>
+            <div class="add-section" id="addEducation">
+                <i class="fas fa-plus-circle"></i>
+                <span>Add Another Degree</span>
+            </div>
+
+            <h3>Skills</h3>
+            <div class="form-group">
+                <label for="skills">Technical Skills* (comma separated)</label>
+                <textarea id="skills" placeholder="JavaScript, Python, React, SQL" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="certifications">Certifications</label>
+                <textarea id="certifications" placeholder="AWS Certified Developer, Google Data Analytics"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="projects">Notable Projects</label>
+                <textarea id="projects" placeholder="E-commerce Website - Built with React and Node.js..."></textarea>
+            </div>
+            
+            <button id="generateResume" class="btn"><i class="fas fa-magic"></i> Generate Resume</button>
+            
+            <div class="preview-container" id="previewContainer" style="display: none;">
+                <h3>Your ATS-Optimized Resume Preview</h3>
+                <div class="resume-preview" id="resumePreview"></div>
+                <div class="download-btn">
+                    <button id="downloadPDF" class="btn"><i class="fas fa-file-pdf"></i> Download PDF</button>
+                    <button id="downloadDOCX" class="btn btn-outline"><i class="fas fa-file-word"></i> Download DOCX</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="interview-simulator" class="interview-container">
+            <div class="interview-panel">
+                <h2 class="section-title">AI Interview Simulator</h2>
+                
+                <div class="avatar-container">
+                    <div class="avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="mic-status" id="micStatus">
+                        <i class="fas fa-microphone-slash"></i>
+                    </div>
+                    <div class="stress-indicator" id="stressIndicator">0</div>
+                </div>
+
+                <div class="interview-question">
+                    <h4>Question:</h4>
+                    <p id="currentQuestion">Select your domain and click "Start Interview" to begin.</p>
+                </div>
+
+                <div class="domain-selector">
+                    <select id="interviewDomain">
+                        <option value="">Select Interview Domain</option>
+                        <option value="software">Software Development</option>
+                        <option value="data">Data Science</option>
+                        <option value="design">UX/UI Design</option>
+                        <option value="business">Business/Marketing</option>
+                        <option value="general">General Interview</option>
+                    </select>
+                </div>
+
+                <div class="controls">
+                    <button class="btn" id="startInterview"><i class="fas fa-microphone"></i> Start Interview</button>
+                    <button class="btn btn-outline" id="nextQuestion" disabled>Next Question</button>
+                    <button class="btn btn-outline" id="stopInterview" disabled><i class="fas fa-stop"></i> Stop</button>
+                </div>
+
+                <div class="feedback-container">
+                    <h4>AI Feedback:</h4>
+                    <p id="aiFeedback">Your feedback will appear here during the interview.</p>
+                    
+                    <div class="transcript-container" id="transcriptContainer"></div>
+                    
+                    <div class="analysis-container" id="analysisContainer">
+                        <h5>Speech Analysis:</h5>
+                        <div id="fillerWords">Filler words: 0</div>
+                        <div id="speechRate">Speech rate: 0 wpm</div>
+                        <div id="pauses">Pauses: 0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interview-panel">
+                <h3>Real-time Interview Coaching</h3>
+                
+                <div class="skill-meter">
+                    <div class="skill-progress" id="stressMeter" style="width: 0%"></div>
+                </div>
+                <p id="stressLevelText">Current stress level: Not detected</p>
+                
+                <h4>Tips to improve your answer:</h4>
+                <ul id="improvementTips">
+                    <li>Structure your answer using STAR method</li>
+                    <li>Include specific metrics when possible</li>
+                    <li>Connect answers to job requirements</li>
+                </ul>
+                
+                <h4>Better Ways to Say:</h4>
+                <div id="betterPhrases">
+                    <p><strong>Instead of:</strong> "I think I did a good job"</p>
+                    <p><strong>Try:</strong> "The project resulted in a 25% increase in user engagement"</p>
+                </div>
+                
+                <h4>Key Phrases for Your Domain:</h4>
+                <ul id="keyPhrases">
+                    <li>"In my previous role at [Company]..."</li>
+                    <li>"I implemented [Technology] which resulted in..."</li>
+                    <li>"I collaborated with [Team] to achieve..."</li>
+                </ul>
+                
+                <h4>Stress Management Techniques:</h4>
+                <ul id="stressTips">
+                    <li><strong>Power Pose:</strong> Stand tall before interview</li>
+                    <li><strong>4-7-8 Breathing:</strong> Inhale 4s, hold 7s, exhale 8s</li>
+                    <li><strong>Grounding:</strong> Notice 5 things you can see</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="career-path" class="path-container">
+            <h2 class="section-title">Your Career Roadmap</h2>
+            
+            <div class="domain-selector">
+                <select id="domainSelect">
+                    <option value="">Select Your Career Domain</option>
+                    <option value="software">Software Development</option>
+                    <option value="data">Data Science</option>
+                    <option value="design">UX/UI Design</option>
+                    <option value="marketing">Digital Marketing</option>
+                    <option value="finance">Finance & Banking</option>
+                </select>
+                <button id="generateRoadmap" class="btn" style="margin-top: 1rem;" disabled>Generate Roadmap</button>
+            </div>
+            
+            <div class="timeline" id="timeline" style="display: none;">
+                <!-- Timeline will be generated here -->
+            </div>
+        </section>
+
+        <section class="certifications" id="certifications" style="display: none;">
+            <h2 class="section-title">Recommended Certifications</h2>
+            <div id="certificationsContainer">
+                <!-- Certifications will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2023 SkillBridge AI. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const generateResumeBtn = document.getElementById('generateResume');
+        const previewContainer = document.getElementById('previewContainer');
+        const resumePreview = document.getElementById('resumePreview');
+        const downloadPDFBtn = document.getElementById('downloadPDF');
+        const downloadDOCXBtn = document.getElementById('downloadDOCX');
+        const domainSelect = document.getElementById('domainSelect');
+        const generateRoadmapBtn = document.getElementById('generateRoadmap');
+        const timeline = document.getElementById('timeline');
+        const certifications = document.getElementById('certifications');
+        const certificationsContainer = document.getElementById('certificationsContainer');
+        const startInterviewBtn = document.getElementById('startInterview');
+        const nextQuestionBtn = document.getElementById('nextQuestion');
+        const stopInterviewBtn = document.getElementById('stopInterview');
+        const currentQuestion = document.getElementById('currentQuestion');
+        const aiFeedback = document.getElementById('aiFeedback');
+        const transcriptContainer = document.getElementById('transcriptContainer');
+        const micStatus = document.getElementById('micStatus');
+        const stressIndicator = document.getElementById('stressIndicator');
+        const stressMeter = document.getElementById('stressMeter');
+        const stressLevelText = document.getElementById('stressLevelText');
+        const improvementTips = document.getElementById('improvementTips');
+        const betterPhrases = document.getElementById('betterPhrases');
+        const keyPhrases = document.getElementById('keyPhrases');
+        const stressTips = document.getElementById('stressTips');
+        const interviewDomain = document.getElementById('interviewDomain');
+        const fillerWordsCount = document.getElementById('fillerWords');
+        const speechRate = document.getElementById('speechRate');
+        const pausesCount = document.getElementById('pauses');
+
+        // Resume Builder Variables
+        let experienceCount = 1;
+        let educationCount = 1;
+
+        // Interview Simulator Variables
+        let recognition;
+        let currentQuestionIndex = 0;
+        let interviewStarted = false;
+        let stressLevel = 0;
+        let transcript = '';
+        let domain = 'general';
+        let wordCount = 0;
+        let fillerWords = 0;
+        let pauses = 0;
+        let startTime = 0;
+        let speakingDuration = 0;
+        let interviewQuestions = [];
+        let domainQuestions = {
+            "software": [
+                "Explain the difference between REST and GraphQL APIs.",
+                "How would you optimize a slow database query?",
+                "Describe your approach to debugging a complex issue.",
+                "What design patterns have you implemented recently?",
+                "How do you ensure code quality in your projects?"
+            ],
+            "data": [
+                "How would you handle missing data in a dataset?",
+                "Explain the bias-variance tradeoff.",
+                "Describe a time you used data to solve a business problem.",
+                "What's your experience with machine learning models?",
+                "How do you evaluate model performance?"
+            ],
+            "general": [
+                "Tell me about yourself.",
+                "What is your greatest strength?",
+                "Describe a challenging work situation and how you overcame it.",
+                "Where do you see yourself in 5 years?",
+                "Why should we hire you?"
+            ]
+        };
+
+        // Career Roadmap Data
+        const domainRoadmaps = {
+            "software": [
+                {
+                    year: "Year 1",
+                    title: "Foundation Building",
+                    content: "Master core programming concepts in your chosen language (Java/Python/JavaScript). Complete 2-3 substantial projects for your portfolio. Learn version control with Git."
+                },
+                {
+                    year: "Year 2",
+                    title: "Specialization",
+                    content: "Choose a specialization (Frontend/Backend/Fullstack). Contribute to open-source projects. Earn AWS/Google Cloud certification. Learn about system design."
+                },
+                {
+                    year: "Year 3",
+                    title: "Professional Growth",
+                    content: "Aim for mid-level developer positions. Develop architecture skills. Start mentoring junior developers. Learn about DevOps practices."
+                },
+                {
+                    year: "Years 4-5",
+                    title: "Advanced Roles",
+                    content: "Target senior developer or tech lead positions. Consider architecture or management tracks. Stay updated with emerging technologies."
+                }
+            ],
+            "data": [
+                {
+                    year: "Year 1",
+                    title: "Fundamentals",
+                    content: "Learn Python/R, SQL, and basic statistics. Complete data cleaning and visualization projects. Understand database systems."
+                },
+                {
+                    year: "Year 2",
+                    title: "Machine Learning",
+                    content: "Study ML algorithms and frameworks. Participate in Kaggle competitions. Earn TensorFlow certification. Learn about big data technologies."
+                },
+                {
+                    year: "Year 3",
+                    title: "Real-world Applications",
+                    content: "Work with large datasets. Develop expertise in a specific industry (healthcare, finance, etc.). Learn about data engineering."
+                },
+                {
+                    year: "Years 4-5",
+                    title: "Advanced Analytics",
+                    content: "Move into data engineering or ML engineering roles. Consider management or research positions. Learn about AI ethics and governance."
+                }
+            ]
+        };
+
+        const domainCertifications = {
+            "software": [
+                {
+                    name: "AWS Certified Developer",
+                    provider: "Amazon Web Services",
+                    duration: "3 months",
+                    level: "Intermediate",
+                    icon: "fab fa-aws"
+                },
+                {
+                    name: "Google Professional Cloud Developer",
+                    provider: "Google",
+                    duration: "4 months",
+                    level: "Advanced",
+                    icon: "fab fa-google"
+                },
+                {
+                    name: "Oracle Certified Professional: Java SE",
+                    provider: "Oracle",
+                    duration: "2 months",
+                    level: "Intermediate",
+                    icon: "fab fa-java"
+                }
+            ],
+            "data": [
+                {
+                    name: "Google Data Analytics",
+                    provider: "Google",
+                    duration: "6 months",
+                    level: "Beginner",
+                    icon: "fas fa-chart-line"
+                },
+                {
+                    name: "Microsoft Certified: Azure Data Scientist",
+                    provider: "Microsoft",
+                    duration: "4 months",
+                    level: "Intermediate",
+                    icon: "fab fa-microsoft"
+                },
+                {
+                    name: "TensorFlow Developer Certificate",
+                    provider: "Google",
+                    duration: "3 months",
+                    level: "Intermediate",
+                    icon: "fas fa-brain"
+                }
+            ]
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners for resume builder
+            document.getElementById('addExperience').addEventListener('click', addExperienceSection);
+            document.getElementById('addEducation').addEventListener('click', addEducationSection);
+            generateResumeBtn.addEventListener('click', generateResume);
+            downloadPDFBtn.addEventListener('click', downloadResumePDF);
+            downloadDOCXBtn.addEventListener('click', downloadResumeDOCX);
+
+            // Career roadmap events
+            domainSelect.addEventListener('change', () => {
+                generateRoadmapBtn.disabled = !domainSelect.value;
+            });
+            generateRoadmapBtn.addEventListener('click', generateRoadmap);
+
+            // Interview simulator events
+            setupSpeechRecognition();
+            startInterviewBtn.addEventListener('click', startInterview);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            stopInterviewBtn.addEventListener('click', stopInterview);
+            interviewDomain.addEventListener('change', updateDomainQuestions);
+        });
+
+        // Resume Builder Functions
+        function addExperienceSection() {
+            experienceCount++;
+            const newExperience = document.createElement('div');
+            newExperience.className = 'form-grid experience-item';
+            newExperience.innerHTML = `
+                <div class="form-group">
+                    <label for="company${experienceCount}">Company Name</label>
+                    <input type="text" id="company${experienceCount}" placeholder="ABC Corp">
+                </div>
+                <div class="form-group">
+                    <label for="position${experienceCount}">Position</label>
+                    <input type="text" id="position${experienceCount}" placeholder="Software Developer">
+                </div>
+                <div class="form-group">
+                    <label for="duration${experienceCount}">Duration</label>
+                    <input type="text" id="duration${experienceCount}" placeholder="Jan 2020 - Present">
+                </div>
+                <div class="form-group">
+                    <label for="responsibilities${experienceCount}">Responsibilities & Achievements</label>
+                    <textarea id="responsibilities${experienceCount}" placeholder="- Developed new features...\n- Improved performance by 30%..."></textarea>
+                </div>
+            `;
+            document.getElementById('experienceContainer').appendChild(newExperience);
+        }
+
+        function addEducationSection() {
+            educationCount++;
+            const newEducation = document.createElement('div');
+            newEducation.className = 'form-grid education-item';
+            newEducation.innerHTML = `
+                <div class="form-group">
+                    <label for="institution${educationCount}">Institution</label>
+                    <input type="text" id="institution${educationCount}" placeholder="State University">
+                </div>
+                <div class="form-group">
+                    <label for="degree${educationCount}">Degree</label>
+                    <input type="text" id="degree${educationCount}" placeholder="Bachelor of Science in Computer Science">
+                </div>
+                <div class="form-group">
+                    <label for="gradYear${educationCount}">Graduation Year</label>
+                    <input type="text" id="gradYear${educationCount}" placeholder="2020">
+                </div>
+            `;
+            document.getElementById('educationContainer').appendChild(newEducation);
+        }
+
+        function generateResume() {
+            // Validate required fields
+            const requiredFields = ['fullName', 'email', 'summary', 'jobTitle', 'company1', 'position1', 'duration1', 'responsibilities1', 'institution1', 'degree1', 'gradYear1', 'skills'];
+            for (const field of requiredFields) {
+                if (!document.getElementById(field).value) {
+                    alert(`Please fill in all required fields (${field.replace(/\d+/g, '')})`);
+                    return;
+                }
+            }
+
+            // Get form values
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const summary = document.getElementById('summary').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const skills = document.getElementById('skills').value;
+            const certs = document.getElementById('certifications').value;
+            const projects = document.getElementById('projects').value;
+
+            // Get work experience
+            let experienceHTML = '';
+            for (let i = 1; i <= experienceCount; i++) {
+                const company = document.getElementById(`company${i}`).value;
+                const position = document.getElementById(`position${i}`).value;
+                const duration = document.getElementById(`duration${i}`).value;
+                const responsibilities = document.getElementById(`responsibilities${i}`).value;
+
+                if (company && position && duration && responsibilities) {
+                    experienceHTML += `
+                        <h4>${position} at ${company}</h4>
+                        <p><em>${duration}</em></p>
+                        <div style="white-space: pre-line; margin-bottom: 1rem;">${responsibilities}</div>
+                    `;
+                }
+            }
+
+            // Get education
+            let educationHTML = '';
+            for (let i = 1; i <= educationCount; i++) {
+                const institution = document.getElementById(`institution${i}`).value;
+                const degree = document.getElementById(`degree${i}`).value;
+                const year = document.getElementById(`gradYear${i}`).value;
+
+                if (institution && degree && year) {
+                    educationHTML += `
+                        <h4>${degree}</h4>
+                        <p><em>${institution}, ${year}</em></p>
+                    `;
+                }
+            }
+
+            // Generate resume HTML with ATS-friendly format
+            resumePreview.innerHTML = `
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <h1 style="color: var(--primary); margin-bottom: 0.5rem;">${fullName}</h1>
+                    <h3 style="color: var(--dark); font-weight: 500;">${jobTitle}</h3>
+                </div>
+                
+                <div style="display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.5rem;">
+                    ${email ? `<div>${email}</div>` : ''}
+                    ${phone ? `<div>${phone}</div>` : ''}
+                    ${linkedin ? `<div>${linkedin}</div>` : ''}
+                </div>
+                
+                <h3 style="color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 0.25rem; margin-top: 1.5rem;">PROFESSIONAL SUMMARY</h3>
+                <p>${summary}</p>
+                
+                <h3 style="color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 0.25rem; margin-top: 1.5rem;">WORK EXPERIENCE</h3>
+                ${experienceHTML}
+                
+                <h3 style="color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 0.25rem; margin-top: 1.5rem;">EDUCATION</h3>
+                ${educationHTML}
+                
+                <h3 style="color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 0.25rem; margin-top: 1.5rem;">SKILLS</h3>
+                <p>${skills}</p>
+                
+                ${certs ? `<h3 style="color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 0.25rem; margin-top: 1.5rem;">CERTIFICATIONS</h3>
+                <p>${certs}</p>` : ''}
+                
+                ${projects ? `<h3 style="color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 0.25rem; margin-top: 1.5rem;">PROJECTS</h3>
+                <div style="white-space: pre-line;">${projects}</div>` : ''}
+                
+                <div style="margin-top: 2rem; font-size: 0.8rem; text-align: center;">
+                    <p>Generated by SkillBridge AI Resume Builder</p>
+                </div>
+            `;
+
+            // Show preview
+            previewContainer.style.display = 'block';
+            previewContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function downloadResumePDF() {
+            alert('In a production environment, this would generate and download a PDF using a library like jsPDF or a server-side solution');
+        }
+
+        function downloadResumeDOCX() {
+            alert('In a production environment, this would generate and download a DOCX file using a library like docx or a server-side solution');
+        }
+
+        // Career Roadmap Functions
+        function generateRoadmap() {
+            const domain = domainSelect.value;
+            
+            if (!domainRoadmaps[domain]) {
+                alert('Roadmap not available for this domain yet');
+                return;
+            }
+
+            // Generate timeline
+            timeline.innerHTML = '';
+            domainRoadmaps[domain].forEach((item, index) => {
+                const positionClass = index % 2 === 0 ? 'left' : 'right';
+                timeline.innerHTML += `
+                    <div class="timeline-item ${positionClass}">
+                        <div class="timeline-content">
+                            <h4>${item.year}: ${item.title}</h4>
+                            <p>${item.content}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Generate certifications
+            certificationsContainer.innerHTML = '';
+            domainCertifications[domain].forEach(cert => {
+                certificationsContainer.innerHTML += `
+                    <div class="cert-card">
+                        <div class="cert-image">
+                            <i class="${cert.icon}"></i>
+                        </div>
+                        <div class="cert-body">
+                            <h4>${cert.name}</h4>
+                            <p>${cert.provider}</p>
+                            <div class="cert-meta">
+                                <span><i class="far fa-clock"></i> ${cert.duration}</span>
+                                <span><i class="fas fa-level-up-alt"></i> ${cert.level}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            timeline.style.display = 'block';
+            certifications.style.display = 'block';
+            timeline.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Interview Simulator Functions
+        function setupSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+
+                recognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    let finalTranscript = '';
+
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        const transcript = event.results[i][0].transcript;
+                        if (event.results[i].isFinal) {
+                            finalTranscript += transcript;
+                        } else {
+                            interimTranscript += transcript;
+                        }
+                    }
+
+                    transcript = finalTranscript || interimTranscript;
+                    transcriptContainer.innerHTML = `<p>${transcript}</p>`;
+                    
+                    // Analyze speech for interview performance
+                    analyzeSpeech(transcript);
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error', event.error);
+                    aiFeedback.textContent = "Error in speech recognition. Please try again.";
+                };
+            } else {
+                startInterviewBtn.disabled = true;
+                aiFeedback.textContent = "Speech recognition not supported in your browser. Try Chrome or Edge.";
+            }
+        }
+
+        function updateDomainQuestions() {
+            domain = interviewDomain.value || 'general';
+            interviewQuestions = [
+                ...(domainQuestions[domain] || []),
+                ...domainQuestions['general']
+            ];
+        }
+
+        function analyzeSpeech(text) {
+            // Simple analysis - in a real app this would use more sophisticated NLP
+            const words = text.split(' ');
+            wordCount = words.length;
+            
+            // Calculate speaking rate
+            const now = new Date().getTime();
+            speakingDuration = (now - startTime) / 1000 / 60; // in minutes
+            const currentRate = speakingDuration > 0 ? Math.round(wordCount / speakingDuration) : 0;
+            
+            // Detect filler words
+            const fillerWordsList = ['um', 'uh', 'like', 'you know', 'so', 'basically', 'actually'];
+            fillerWords = words.filter(word => fillerWordsList.includes(word.toLowerCase())).length;
+            
+            // Detect pauses (periods of silence or hesitation)
+            pauses = (text.match(/\.\.\.|--|pause/gi) || []).length;
+            
+            // Update UI
+            fillerWordsCount.textContent = `Filler words: ${fillerWords}`;
+            speechRate.textContent = `Speech rate: ${currentRate} wpm`;
+            pausesCount.textContent = `Pauses: ${pauses}`;
+            
+            // Calculate stress level (0-100)
+            stressLevel = Math.min(100, Math.max(0, 
+                20 + 
+                (fillerWords * 5) + 
+                (pauses * 3) - 
+                (wordCount / 10) +
+                (currentRate < 100 ? 10 : 0) +
+                (currentRate > 200 ? 15 : 0)
+            ));
+            
+            updateStressIndicator();
+            
+            // Provide feedback when user stops speaking
+            if (text.length > 50 && !recognition.interimResults) {
+                provideFeedback(text);
+            }
+        }
+
+        function updateStressIndicator() {
+            stressIndicator.textContent = Math.round(stressLevel);
+            stressMeter.style.width = `${stressLevel}%`;
+            
+            if (stressLevel > 80) {
+                stressIndicator.className = 'stress-indicator high';
+                stressLevelText.textContent = 'Current stress level: High';
+                stressTips.innerHTML = `
+                    <li>Take a 5-second deep breath before continuing</li>
+                    <li>Slow down your speaking pace</li>
+                    <li>Remember it's okay to pause and think</li>
+                    <li>Focus on one question at a time</li>
+                `;
+            } else if (stressLevel > 60) {
+                stressIndicator.className = 'stress-indicator medium';
+                stressLevelText.textContent = 'Current stress level: Medium';
+                stressTips.innerHTML = `
+                    <li>Try to relax your shoulders</li>
+                    <li>Smile slightly to reduce tension</li>
+                    <li>Use hand gestures naturally</li>
+                    <li>Take a quick sip of water if needed</li>
+                `;
+            } else {
+                stressIndicator.className = 'stress-indicator';
+                stressLevelText.textContent = 'Current stress level: Low';
+                stressTips.innerHTML = `
+                    <li>Maintain this calm energy</li>
+                    <li>Keep your breathing steady</li>
+                    <li>Stay focused and present</li>
+                `;
+            }
+        }
+
+        function provideFeedback(answer) {
+            // Simple feedback - in a real app this would use AI/NLP
+            const feedbackList = [
+                "Try to structure your answer using the STAR method (Situation, Task, Action, Result).",
+                "Your answer was clear but could benefit from a specific example.",
+                "Excellent technical explanation! Now try connecting it to business impact.",
+                "Good start. Now elaborate on how you measured the success of this approach.",
+                "Perfect! You demonstrated both technical knowledge and communication skills.",
+                "Consider adding more quantitative results to strengthen your answer.",
+                "Great job addressing the question directly. Now add more depth to your response."
+            ];
+            
+            const phraseImprovements = [
+                {
+                    weak: "I think I'm good at this",
+                    strong: "My experience with X demonstrates my capability in this area"
+                },
+                {
+                    weak: "I don't know",
+                    strong: "I haven't encountered that scenario yet, but here's how I would approach it"
+                },
+                {
+                    weak: "That's not my job",
+                    strong: "While that wasn't my primary responsibility, I collaborated with the team by..."
+                },
+                {
+                    weak: "I guess",
+                    strong: "Based on my experience, I would"
+                },
+                {
+                    weak: "I'm not sure",
+                    strong: "I would need to research that, but my initial approach would be"
+                }
+            ];
+            
+            const randomFeedback = feedbackList[Math.floor(Math.random() * feedbackList.length)];
+            const randomImprovement = phraseImprovements[Math.floor(Math.random() * phraseImprovements.length)];
+            
+            aiFeedback.innerHTML = `
+                <p><strong>Feedback:</strong> ${randomFeedback}</p>
+                <p><strong>Example Improvement:</strong> Instead of "${randomImprovement.weak}", try "${randomImprovement.strong}"</p>
+            `;
+            
+            // Update key phrases based on domain
+            if (domain === 'software') {
+                keyPhrases.innerHTML = `
+                    <li>"I architected a solution using..."</li>
+                    <li>"The system achieved 99.9% uptime..."</li>
+                    <li>"I optimized the code to reduce latency by..."</li>
+                `;
+            } else if (domain === 'data') {
+                keyPhrases.innerHTML = `
+                    <li>"The data revealed insights about..."</li>
+                    <li>"I built a model with 95% accuracy..."</li>
+                    <li>"The analysis led to a X% improvement in..."</li>
+                `;
+            } else {
+                keyPhrases.innerHTML = `
+                    <li>"In my previous role at [Company]..."</li>
+                    <li>"I implemented [Technology] which resulted in..."</li>
+                    <li>"I collaborated with [Team] to achieve..."</li>
+                `;
+            }
+        }
+
+        function getNextQuestion() {
+            currentQuestionIndex = (currentQuestionIndex + 1) % interviewQuestions.length;
+            return interviewQuestions[currentQuestionIndex];
+        }
+
+        function startInterview() {
+            if (!interviewDomain.value) {
+                alert('Please select an interview domain first');
+                return;
+            }
+            
+            interviewStarted = true;
+            startInterviewBtn.disabled = true;
+            nextQuestionBtn.disabled = false;
+            stopInterviewBtn.disabled = false;
+            
+            domain = interviewDomain.value || 'general';
+            currentQuestionIndex = -1;
+            transcript = '';
+            wordCount = 0;
+            fillerWords = 0;
+            pauses = 0;
+            stressLevel = 0;
+            startTime = new Date().getTime();
+            
+            // Update UI
+            micStatus.className = 'mic-status active';
+            micStatus.innerHTML = '<i class="fas fa-microphone"></i>';
+            transcriptContainer.innerHTML = '';
+            stressIndicator.textContent = '0';
+            stressMeter.style.width = '0%';
+            stressLevelText.textContent = 'Current stress level: Not detected';
+            
+            // Start speech recognition
+            if (recognition) {
+                recognition.start();
+            }
+            
+            // Ask first question
+            currentQuestion.textContent = getNextQuestion();
+            aiFeedback.textContent = "Listening... Speak your answer clearly.";
+        }
+
+        function nextQuestion() {
+            currentQuestion.textContent = getNextQuestion();
+            aiFeedback.textContent = "Listening... Speak your answer now.";
+            transcript = '';
+            transcriptContainer.innerHTML = '';
+            stressLevel = Math.max(0, stressLevel - 20);
+            updateStressIndicator();
+            startTime = new Date().getTime(); // Reset timer for speaking rate
+        }
+
+        function stopInterview() {
+            interviewStarted = false;
+            startInterviewBtn.disabled = false;
+            nextQuestionBtn.disabled = true;
+            stopInterviewBtn.disabled = true;
+            
+            // Stop speech recognition
+            if (recognition) {
+                recognition.stop();
+            }
+            
+            // Update UI
+            micStatus.className = 'mic-status';
+            micStatus.innerHTML = '<i class="fas fa-microphone-slash"></i>';
+            aiFeedback.textContent = "Interview stopped. You can review your performance above.";
+            
+            // Show summary
+            const avgWPM = speakingDuration > 0 ? Math.round(wordCount / speakingDuration) : 0;
+            const summary = `
+                <h5>Interview Summary:</h5>
+                <p>Total questions answered: ${currentQuestionIndex + 1}</p>
+                <p>Average speech rate: ${avgWPM} words per minute</p>
+                <p>Filler words used: ${fillerWords}</p>
+                <p>Average stress level: ${Math.round(stressLevel)}%</p>
+            `;
+            
+            transcriptContainer.insertAdjacentHTML('beforeend', summary);
+        }
+    </script>
+</body>
+</html>                 
